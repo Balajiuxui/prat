@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Down Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navigation Wrapper (Fixed at the top) */
+        .nav-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Menu Button */
+        .menu {
+            display: inline-block;
+            width: 50px;
+            height: 30px;
+            background-color: blue;
+            color: white;
+            line-height: 30px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: transform 0.4s ease-in-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navigation Menu (Initially Hidden) */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background-color: blueviolet;
+            padding: 1rem;
+            margin: auto;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-50px);
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            position: relative;
+            z-index: 5;
+            top:-30px;
+        }
+
+        /* Slide Down Effect */
+        .nav-wrapper:hover .menu {
+            transform: translateY();
+        }
+
+        .nav-wrapper:hover nav {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            display: flex;
+            top: 0;
+        }
+
+        /* Navigation Links */
+        nav a {
+            text-decoration: none;
+            font-size: 1rem;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: yellow;
+        }
+
+        /* Content for Scrolling */
+        .container {
+            background-color: aqua;
+            height: 2000px;
+            width: 100vw;
+            margin-top: 80px; /* Prevent content from being hidden under fixed navbar */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Navigation Wrapper -->
+    <div class="nav-wrapper">
+        
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+        <div class="menu">☰</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container"></div>
+
+</body>
+</html>
