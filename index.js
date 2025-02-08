@@ -1,28 +1,49 @@
-console.log('hi krishna')
+console.log("hi krishna");
 
 import express from "express";
-const app=express();
-const port=3000;
+import bodyParser from "body-parser";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
+const app = express();
+const port = 3000;
 
-app.get("/",(req,res)=>
-{
-    // console.log(req);
-    res.send("<h1>hello world<h2>");
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+    res.send(`
+        <h1>Hello World</h1>
+        <form action="/about" method="post">
+            <label for="balaji">Balaji</label>
+            <input type="text" name="balaji" required placeholder="Hello World">
+            <button type="submit">Submit</button>
+        </form>
+
+        <form action="/submit" method="post">
+        <button type="submit">hello</button>
+        </form>
+    `);
 });
 
-app.post("/about",(req,res)=>
-{
-res.sendStatus(201);
-res.send("hello bala")
-})
-
-app.get("/about",(req,res)=>
+app.post("/about", (req, res) => {
+    const name = req.body.balaji; // ✅ Get input before sending a response
+    console.log("Received Name:", name); // ✅ Log first
+    const names=["aswini", "deepa", "aswinideepa"]
+    if(names.includes(name)){
+        res.send(`${name}love you.`); // ✅ Now send the response
+    }
+    else
     {
-    // res.sendStatus(201);
-    res.send("hello bala")
-    })
-app.listen(port,()=>
+        res.send(`love you 3000 times`)
+    }
+});
+
+app.post("/submit",(req,res)=>
 {
-    console.log(`hi ${port}`)
+    res.sendFile(__dirname + "/public/index.html")
+})
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
 });
